@@ -80,13 +80,3 @@ export class CalculatorFacade implements ICalculator {
     return await this.getBodyResult(body, 'Multiply');
   }
 }
-
-const facade = new CalculatorFacade();
-(async () => {
-  console.log(
-    await facade.sum(10, 5),
-    await facade.substract(20, 3),
-    await facade.divide(30, 10),
-    await facade.multiply(15, 15),
-  )
-})()
