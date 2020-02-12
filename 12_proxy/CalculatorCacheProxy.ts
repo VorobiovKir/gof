@@ -51,8 +51,6 @@ export class CalculatorCacheProxy implements ICalculator {
 
     const result = await this.calculatorFacade.multiply(a, b);
     this.setCache(cacheKey, result);
-
-    console.log(777, this.cache);
     
     return result;
   }
