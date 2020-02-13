@@ -15,7 +15,7 @@ class Main {
     console.assert(ingridients.pineapple === false, 'something goes wrong!');
     console.assert(ingridients.seafood === false, 'something goes wrong!');
 
-    /* ADD BACON AND CHEESE TO PIZZA */
+    /* ADD BACON, PINEAPPLE AND CHEESE TO PIZZA */
     const pizzaInvoker = new PizzaInvoker();
     pizzaInvoker.addIngridients(pizza, [Ingridients.bacon, Ingridients.pineapple ,Ingridients.cheese]);
 
@@ -36,7 +36,7 @@ class Main {
     console.assert(ingridients.pineapple === true, 'something goes wrong!');
     console.assert(ingridients.seafood === false, 'something goes wrong!');
 
-    /* REDO LAST UNDO ACTION (adding cheese) */
+    /* REDO LAST UNDO ACTION (return back cheese) */
     pizzaInvoker.redoLast();
 
     ingridients = pizza.getIngridients();
