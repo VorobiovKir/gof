@@ -1,9 +1,10 @@
+import { CalculatorCacheProxy } from './CalculatorCacheProxy';
 import { ICalculator } from "./facade/ICalculator";
-import { CalculatorFacade } from "./facade/CalculatorFacade";
+
 
 class Main {
   async demo() {
-    const calculator: ICalculator = new CalculatorFacade();
+    const calculator: ICalculator = new CalculatorCacheProxy();
 
     const firstNumber = 20;
     const secondNumber = 5;
@@ -19,7 +20,7 @@ class Main {
     
     const multiplyResult = await calculator.multiply(firstNumber, secondNumber);
     console.assert(multiplyResult === (firstNumber * secondNumber), 'Multiply error!')
-  }
+ }
 }
 
 const app = new Main();
