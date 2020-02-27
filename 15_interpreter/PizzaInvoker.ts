@@ -2,10 +2,12 @@ import { IPizzaInvoker } from './IPizzaInvoker';
 import { PizzaCommand } from './commands/PizzaCommand';
 import { Pizza } from './Pizza';
 import { Ingridients } from './Ingridients';
+import { PizzaCommandExpression } from './expressions/PizzaCommandExpression';
 import { 
   AddBaconCommand, AddCheeseCommand, AddMashroomCommand, 
   AddPineappleCommand, AddSeafoodCommand 
 } from './commands'; 
+import { PizzaTerminateCommandExpression } from './expressions/PizzaTerminateCommandExpression';
 
 export class PizzaInvoker implements IPizzaInvoker {
   private executedList: PizzaCommand[] = [];
@@ -47,6 +49,27 @@ export class PizzaInvoker implements IPizzaInvoker {
       lastUndoCommand.execute();
       this.executedList.push(lastUndoCommand);
     }
+  }
+
+  executeExpression(pizza: Pizza, commandExpession: string) {
+    const baseExpression = new PizzaCommandExpression();
+    
+    const commands = commandExpession.split(' ');
+    commands.some(command => {
+      const isTerminate = command.split('').pop() === ';';
+      const ingridient = command.replace(/\W/gi, '');
+
+      const pizzaCommand = this.getPizzaCommand(pizza, ingridient as Ingridients);
+
+      if (isTerminate) {
+        baseExpression.addChildExpression(new PizzaTerminateCommandExpression(pizzaCommand));
+        return true;
+      }
+
+      baseExpression.addChildExpression(new PizzaCommandExpression(pizzaCommand));
+    });
+
+    baseExpression.interprete();
   }
 
   addIngridients(pizza: Pizza, ingridients: Ingridients[] = []) {
