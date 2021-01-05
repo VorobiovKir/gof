@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@types/node": "^13.7.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "axios-https-proxy-fix": "^0.17.1",
     "xml2js": "^0.4.23"
   }
